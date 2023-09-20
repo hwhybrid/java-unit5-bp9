@@ -2,7 +2,6 @@ package com.example.unit_5;
 import java.util.HashSet;
 
 public class MissingNumber {
-
 // The Problem
 // Imagine a list of numbers from 1 to max_num, inclusive - except that one of these numbers will be missing from the list.
 // Write a function that takes this list of numbers, as well as the max_num, and it should return the missing number.

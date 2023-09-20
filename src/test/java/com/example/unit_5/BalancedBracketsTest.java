@@ -5,51 +5,52 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class BalancedBracketsTest {
-    String balancedParens = "(1)";
-    String tooManyOpenParens = "((1";
-    String tooManyOpenParens1 = "(1)(";
-    String tooManyClosedParens = "(1))";
-    String startClosedParens = ")(";
-    String emptyString = "";
-    String balancedAngleBrackets = "<<>>";
-    String balancedComboBrackets = "<({})>";
-    String mismatchedBrackets = "<({)}>";
-
-    BalancedBrackets bb = new BalancedBrackets();
 
     @Test
-    public void testBalancedBrackets_balancedParens() {
-        assertTrue(bb.balancedBrackets("(1)"));
+    public void testBalancedString1() {
+        String string1 = "{[()]}";
+        assertTrue(BalancedBrackets.isBalanced(string1));
     }
 
     @Test
-    public void testBalancedBrackets_tooManyOpenParens() {
-        assertFalse(bb.balancedBrackets("({1)"));
+    public void testUnbalancedString1() {
+        String string2 = "{[()]})";
+        assertFalse(BalancedBrackets.isBalanced(string2));
     }
 
     @Test
-    public void testBalancedBrackets_tooManyClosedParens() {
-        assertFalse(bb.balancedBrackets("({1})>"));
+    public void testUnbalancedString2() {
+        String string3 = "{[<]}";
+        assertFalse(BalancedBrackets.isBalanced(string3));
     }
 
     @Test
-    public void testBalancedBrackets_startWithClosedParens() {
-        assertFalse(bb.balancedBrackets(")("));
+    public void testNoBrackets() {
+        String string4 = "abc";
+        assertTrue(BalancedBrackets.isBalanced(string4));
     }
 
     @Test
-    public void testBalancedBrackets_emptyString() {
-        assertTrue(bb.balancedBrackets(""));
+    public void testEmptyString() {
+        String string5 = "";
+        assertTrue(BalancedBrackets.isBalanced(string5));
     }
 
     @Test
-    public void testBalancedBrackets_balancedComboBrackets() {
-        assertTrue(bb.balancedBrackets("<({})>"));
+    public void testNestedBrackets() {
+        String string6 = "{[()]}{}";
+        assertTrue(BalancedBrackets.isBalanced(string6));
     }
 
     @Test
-    public void testBalancedBrackets_mismatchedBrackets() {
-        assertTrue(bb.balancedBrackets("<({)}>"));
+    public void testMissingClosingBracket() {
+        String string7 = "{[()]";
+        assertFalse(BalancedBrackets.isBalanced(string7));
     }
 
+    @Test
+    public void testMissingOpeningBracket() {
+        String string8 = "([)]";
+        assertFalse(BalancedBrackets.isBalanced(string8));
+    }
 }
